@@ -85,14 +85,6 @@ return new Symbol(sym.EOF);
 
 \n        { CharNum.num = 1; }
 
-
-\t        { Symbol S = new Symbol(sym.PLUS, new TokenVal(yyline+1, CharNum.num));
-            CharNum.num += 4;
-            return S;
-          }
-
-
-
 {WHITESPACE}+  { CharNum.num += yytext().length(); }
 
 "+"       { Symbol S = new Symbol(sym.PLUS, new TokenVal(yyline+1, CharNum.num));
