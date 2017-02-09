@@ -42,5 +42,8 @@ public class sym {
   public static final int STRINGLITERAL = 16;
   public static final int FALSE = 6;
   public static final int STRUCT = 7;
+
+  // For test
+  public static final int ALLOWEDESCAPE = 50;
 }
 
