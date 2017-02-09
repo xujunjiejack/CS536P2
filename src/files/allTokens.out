@@ -1,2 +1,7 @@
 123
-+
+++ at line 2 char 1
+++ at line 2 char 17
+bool at line 3 char 1
+int
+struct at line 3 char 10
+struct at line 4 char 1

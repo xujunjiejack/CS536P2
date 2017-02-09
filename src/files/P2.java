@@ -14,7 +14,6 @@ public class P2 {
         // test all tokens
         testAllTokens();
         CharNum.num = 1;
-    
         // ADD CALLS TO OTHER TEST METHODS HERE
     }
 
@@ -48,7 +47,9 @@ public class P2 {
         while (token.sym != sym.EOF) {
             switch (token.sym) {
             case sym.BOOL:
-                outFile.println("bool"); 
+                outFile.println("bool at line " +
+                        ((TokenVal)token.value).linenum + " char "
+                        + ((TokenVal)token.value).charnum);
                 break;
 			case sym.INT:
                 outFile.println("int");
@@ -63,7 +64,9 @@ public class P2 {
                 outFile.println("false"); 
                 break;
             case sym.STRUCT:
-                outFile.println("struct"); 
+                outFile.println("struct at line " +
+                        ((TokenVal)token.value).linenum + " char "
+                        + ((TokenVal)token.value).charnum);
                 break;
             case sym.CIN:
                 outFile.println("cin"); 
@@ -120,13 +123,17 @@ public class P2 {
                 outFile.println(">>");
                 break;				
             case sym.PLUSPLUS:
-                outFile.println("++");
+                outFile.println("++ at line " +
+                        ((TokenVal)token.value).linenum + " char "
+                        + ((TokenVal)token.value).charnum);
                 break;
             case sym.MINUSMINUS:
                 outFile.println("--");
                 break;	
             case sym.PLUS:
-                outFile.println("+");
+                outFile.println("+ at line " +
+                        ((TokenVal)token.value).linenum + " char "
+                        + ((TokenVal)token.value).charnum);
                 break;
             case sym.MINUS:
                 outFile.println("-");

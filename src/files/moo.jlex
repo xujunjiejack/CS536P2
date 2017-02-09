@@ -58,7 +58,8 @@ class CharNum {
 
 DIGIT=        [0-9]
 WHITESPACE=   [\040\t]
-
+SingleQuote = [\'']
+DoubleQuote = [\""]
 
 %implements java_cup.runtime.Scanner
 %function next_token
@@ -84,16 +85,50 @@ return new Symbol(sym.EOF);
 
 \n        { CharNum.num = 1; }
 
+
+\t        { Symbol S = new Symbol(sym.PLUS, new TokenVal(yyline+1, CharNum.num));
+            CharNum.num += 4;
+            return S;
+          }
+
+
+
 {WHITESPACE}+  { CharNum.num += yytext().length(); }
 
 "+"       { Symbol S = new Symbol(sym.PLUS, new TokenVal(yyline+1, CharNum.num));
             CharNum.num++;
             return S;
           }
-        
+
+"bool"    { Symbol S = new Symbol(sym.BOOL, new TokenVal(yyline+1, CharNum.num)); 
+            CharNum.num += 4;
+            return S;
+          }
+
+"struct"  { Symbol S = new Symbol(sym.STRUCT, new TokenVal(yyline + 1, CharNum.num));
+            CharNum.num += 6;
+            return S;
+          }
+
+"int"     { Symbol S = new Symbol(sym.INT, new TokenVal(yyline+1, CharNum.num));
+            CharNum.num += 3;
+            return S;
+          }
+
+"if"      { Symbol S =new Symbol(sym.IF, new TokenVal(yyline+1, CharNum.num));
+            CharNum.num += 2;
+            return S;
+          }
+
+"++"      { Symbol S =new Symbol(sym.PLUSPLUS, new TokenVal(yyline+1, CharNum.num));
+            CharNum.num += 2;
+            return S;
+          }
+
+
+
+
 .         { ErrMsg.fatal(yyline+1, CharNum.num,
                          "ignoring illegal character: " + yytext());
             CharNum.num++;
           }
-
-BOOL      { Symbol S
