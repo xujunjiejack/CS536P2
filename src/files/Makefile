@@ -37,7 +37,10 @@ ErrMsg.class: ErrMsg.java
 ###
 test:
 	java -cp $(CP) P2 
-	diff allTokens.in allTokens.out
+	diff allTokens.answer allTokens.out
+	diff FALSE_SYMBOL_OUT.txt FALSE_SYMBOL_ANSWER.txt
+	diff TEST_IDENTIFIER_OUT.txt TEST_IDENTIFIER_ANSWER.txt
+	diff string_test_answer.txt string_test_out.txt
 
 ###
 # clean up

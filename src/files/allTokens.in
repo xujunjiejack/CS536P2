@@ -1,8 +1,40 @@
-123
-++              ++
-
-"avbcac \n  \ a b c
-
-a
-bool int struct
++
+||
+bool
+it
+void
+true
+false
 struct
+cin
+cout
+if
+else
+while
+return
+{
+}
+(  )
+)
+;
+,
+.
+<<
+>>
+++
+--
++
+-
+*
+/
+!
+&&
+||
+==
+!=
+<
+>
+<=
+>=
+=
+11111111111111111111111111111 # Test out of range

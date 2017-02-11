@@ -1,0 +1,4 @@
+"This is a normal good string"
+"Good String \n,\t,\\,\?,\",\'"
+"It's a good string"
+"# It's a good string with comment"

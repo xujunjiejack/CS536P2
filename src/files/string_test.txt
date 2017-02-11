@@ -1,0 +1,10 @@
+"This is a normal good string"
+"Good String \n,\t,\\,\?,\",\'"
+"It's a good string"
+"# It's a good string with comment"
+"Bad string \"
+"Bad string \2"
+"Bad string as well \a \n \3"
+"Unterminated string a b c
+"Unterminated string with bad character \ a b c
+
