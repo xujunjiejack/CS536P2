@@ -94,7 +94,10 @@ public class P2 {
                 outFile.println(((IntLitTokenVal)token.value).intVal);
                 break;
             case sym.STRINGLITERAL: 
-                outFile.println(((StrLitTokenVal)token.value).strVal);
+                outFile.println(((StrLitTokenVal)token.value).strVal + " at line "
+                                 + ((StrLitTokenVal)token.value).linenum + " char "
+                                   + ((StrLitTokenVal)token.value).charnum);
+
                 break;    
             case sym.LCURLY:
                 outFile.println("{");
@@ -254,7 +257,9 @@ public class P2 {
                     outFile.println(((IntLitTokenVal)token.value).intVal);
                     break;
                 case sym.STRINGLITERAL:
-                    outFile.println(((StrLitTokenVal)token.value).strVal);
+                    outFile.println(((StrLitTokenVal)token.value).strVal + " is string at line "
+                            + ((StrLitTokenVal)token.value).linenum + " char "
+                            + ((StrLitTokenVal)token.value).charnum);
                     break;
                 case sym.LCURLY:
                     outFile.println("{");

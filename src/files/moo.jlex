@@ -56,15 +56,17 @@ class CharNum {
 }
 %%
 
-
 DIGIT=        [0-9]
 WHITESPACE=   [\040\t]
-SingleQuote = [\']
-DoubleQuote = [\"]
+SingleQuote = [']
+DoubleQuote = [(\")]
 LETTER = [A-Za-z]
 UNDERSCORE = [_]
 RESERVED = ["bool""int""void""true""false""struct""cin""cout""if""else""while""return"]
-ALLOWEDESCAPE = (\\)[tn'"?\]
+ALLOWEDESCAPE = (\\)[tn\'\"?\\]
+DISALLOWEDESCAPE = (\\[^tn\'\"?\\])
+
+
 
 %implements java_cup.runtime.Scanner
 %function next_token
@@ -122,17 +124,34 @@ return new Symbol(sym.EOF);
             return S;
           }
 
-
-{ALLOWEDESCAPE} {
-        Symbol S =new Symbol(sym.ALLOWEDESCAPE, new TokenVal(yyline+1, CharNum.num));
-            CharNum.num += yytext().length;
-            return S;
-        }
-
 ({LETTER}|{UNDERSCORE})({DIGIT}|{LETTER}|{UNDERSCORE})* 
     { Symbol S = new Symbol(sym.ID, new IdTokenVal(yyline+1, CharNum.num, yytext()));
       CharNum.num += yytext().length();
       return S;
+    }
+
+{DoubleQuote}(({ALLOWEDESCAPE}|[^\"\n\\])*){DoubleQuote}
+    {
+    Symbol S = new Symbol(sym.STRINGLITERAL, new StrLitTokenVal(yyline+1, CharNum.num, yytext()));
+          CharNum.num += yytext().length();
+          return S;
+    }
+
+{DoubleQuote}(({ALLOWEDESCAPE}|[^\"\n\\])*{DISALLOWEDESCAPE}+({ALLOWEDESCAPE}|[^\"\n\\])*){DoubleQuote}
+    {     ErrMsg.fatal(yyline+1, CharNum.num, "string literal with bad escaped character" + yytext() );
+          CharNum.num += yytext().length();
+    }
+
+{DoubleQuote}(({ALLOWEDESCAPE}|[^\"\n\\])*{DISALLOWEDESCAPE}+({ALLOWEDESCAPE}|[^\"\n\\])*)[^\n$]
+    {
+          ErrMsg.fatal(yyline+1, CharNum.num, "unterminated string literal with bad escaped character" + yytext() );
+          CharNum.num = 1;
+    }
+
+{DoubleQuote}(({ALLOWEDESCAPE}|[^\"\n\\])*)[^\n$]
+    {
+          ErrMsg.fatal(yyline+1, CharNum.num, "unterminated string literal" + yytext() );
+          CharNum.num = 1;
     }
 
 .         { ErrMsg.fatal(yyline+1, CharNum.num,

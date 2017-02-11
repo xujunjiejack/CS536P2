@@ -1,8 +1,8 @@
 123
 ++ at line 2 char 1
 ++ at line 2 char 17
-a is identifier at line 4 char 1
-bool at line 5 char 1
+a is identifier at line 6 char 1
+bool at line 7 char 1
 int
-struct at line 5 char 10
-struct at line 6 char 1
+struct at line 7 char 10
+struct at line 8 char 1
